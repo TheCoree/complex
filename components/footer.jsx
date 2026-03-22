@@ -50,7 +50,7 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-foreground transition-colors">
+                <a href="/calculator" className="hover:text-foreground transition-colors">
                   Калькулятор
                 </a>
               </li>

@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button"
 import { ChevronDown, Menu, Moon, Sun, BookOpen, Calculator, Zap, Grid3x3, TrendingUp, Shapes, X } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useEffect, useState, useRef } from "react"
+import { COURSES as courses } from "@/lib/courses"
+
 export function Navigation() {
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
@@ -32,14 +34,6 @@ export function Navigation() {
       setIsCoursesOpen(false)
     }, 150)
   }
-  const courses = [
-    { id: 1, icon: BookOpen, title: "Введение", desc: "Основы комплексных чисел" },
-    { id: 2, icon: Calculator, title: "Основные операции", desc: "Сложение, умножение" },
-    { id: 3, icon: Zap, title: "Алгебраическая форма", desc: "a + bi представление" },
-    { id: 4, icon: Grid3x3, title: "Тригонометрическая форма", desc: "Полярные координаты" },
-    { id: 5, icon: TrendingUp, title: "Показательная форма", desc: "Формула Эйлера" },
-    { id: 6, icon: Shapes, title: "Геометрия", desc: "Визуализация и приложения" },
-  ]
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="container mx-auto px-4 lg:px-12">
@@ -68,7 +62,7 @@ export function Navigation() {
                       return (
                         <a
                           key={course.id}
-                          href="#"
+                          href={course.href}
                           className="relative block px-3 py-2.5 rounded-lg hover:bg-accent/10 transition-colors border border-border/50 group"
                         >
                           <div className="absolute top-2 right-2 text-4xl font-bold text-muted-foreground/10 leading-none">
@@ -84,8 +78,11 @@ export function Navigation() {
                 </div>
               )}
             </div>
-            <a href="#visualization" className="text-sm font-medium hover:text-accent transition-colors">
-              Визуализация
+            <a href="/lessons" className="text-sm font-medium hover:text-accent transition-colors">
+              Все уроки
+            </a>
+            <a href="/calculator" className="text-sm font-medium hover:text-accent transition-colors">
+              Калькулятор
             </a>
             <a href="#examples" className="text-sm font-medium hover:text-accent transition-colors">
               Примеры
@@ -141,7 +138,7 @@ export function Navigation() {
                       return (
                         <a
                           key={course.id}
-                          href="#"
+                          href={course.href}
                           className="block p-4 rounded-xl bg-accent/5 border border-border/50 hover:bg-accent/10 transition-colors"
                           onClick={() => setIsMobileMenuOpen(false)}
                         >
@@ -164,11 +161,18 @@ export function Navigation() {
                 )}
               </div>
               <a
-                href="#visualization"
+                href="/lessons"
                 className="text-lg font-medium hover:text-accent transition-colors py-2"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Визуализация
+                Все уроки
+              </a>
+              <a
+                href="/calculator"
+                className="text-lg font-medium hover:text-accent transition-colors py-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Калькулятор
               </a>
               <a
                 href="#examples"
@@ -178,10 +182,11 @@ export function Navigation() {
                 Примеры
               </a>
               <Button
+                asChild
                 className="w-full bg-primary text-primary-foreground hover:bg-primary/90 py-6 text-lg mt-4"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Начать изучение
+                <a href="/calculator">Начать изучение</a>
               </Button>
             </div>
           </div>
