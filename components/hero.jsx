@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 import { LightRays } from "@/components/ui/light-rays"
 import { useTheme } from 'next-themes';  // Импорт хука для тем
+import Link from "next/link"
 
 export function Hero() {
   const canvasRef = useRef(null)
@@ -151,13 +152,15 @@ export function Hero() {
           >
             Откройте элегантность математики через интерактивные визуализации
           </p>
-          <Button
-            size="lg"
-            className="group text-lg !px-5 py-3 md:!px-10 md:py-5 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 h-auto transition-all duration-300"
-          >
-            Начать изучение
-            <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-          </Button>
+          <Link href="/lessons" passHref>
+            <Button
+              size="lg"
+              className="group text-lg !px-5 py-3 md:!px-10 md:py-5 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 h-auto transition-all duration-300"
+            >
+              Начать изучение
+              <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+            </Button>
+          </Link>
         </div>
       </div>
       {/* <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background to-transparent" /> */}

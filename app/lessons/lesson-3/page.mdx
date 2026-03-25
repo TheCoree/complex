@@ -1,5 +1,150 @@
-# Урок 3: Алгебраическая форма
+import { StaticComplexPlane } from "@/components/static-complex-plane"
+import MathExpression from "@/components/MathExpression"
 
-Здесь будет подробный разбор алгебраической формы комплексного числа $a + bi$.
+# Урок 3: Алгебраическая форма и решение уравнений с комплексными числами
 
-*Этот раздел находится в разработке.*
+Мы уже умеем складывать, вычитать, умножать и делить комплексные числа.  
+Теперь пришло время научиться **решать уравнения** — от самых простых до тех, которые в школе казались «невозможными».
+
+---
+
+### 1. Что такое алгебраическая форма?
+
+Любое комплексное число можно записать как:
+<MathExpression displayMode>{"z = a + bi"}</MathExpression>
+
+где  
+- <MathExpression inline>{"a = \\operatorname{Re}(z)"}</MathExpression> — действительная часть,  
+- <MathExpression inline>{"b = \\operatorname{Im}(z)"}</MathExpression> — мнимая часть.
+
+Это и есть **алгебраическая (или прямоугольная) форма**.  
+Она удобна для сложения и вычитания, но особенно мощна при решении уравнений.
+
+---
+
+### 2. Линейные уравнения с комплексными числами
+
+Решение линейных уравнений почти не отличается от школьной алгебры.
+
+**Пример 1:**
+
+<MathExpression displayMode>{"(2 + 3i)z + (1 - i) = 4 + 5i"}</MathExpression>
+
+Сначала перенесём свободный член:
+
+<MathExpression displayMode>{"(2 + 3i)z = (4 + 5i) - (1 - i)"}</MathExpression>
+<MathExpression displayMode>{"(2 + 3i)z = 3 + 6i"}</MathExpression>
+
+Теперь найдём <MathExpression inline>{"z"}</MathExpression>, разделив на коэффициент:
+
+<MathExpression displayMode>{"z = \\frac{3 + 6i}{2 + 3i}"}</MathExpression>
+
+Умножаем числитель и знаменатель на сопряжённое <MathExpression inline>{"2 - 3i"}</MathExpression>:
+
+<MathExpression displayMode>{"z = \\frac{(3 + 6i)(2 - 3i)}{(2)^2 + (3)^2} = \\frac{6 - 9i + 12i - 18i^2}{4 + 9} = \\frac{6 + 3i + 18}{13} = \\frac{24 + 3i}{13} = \\frac{24}{13} + \\frac{3}{13}i"}</MathExpression>
+
+**Вывод:** решение линейного уравнения — это всегда одно комплексное число.
+
+---
+
+### 3. Квадратные уравнения — главная сила комплексных чисел
+
+Вспомним школьное правило: если дискриминант <MathExpression inline>{"D < 0"}</MathExpression>, корней нет.  
+С комплексными числами **корни есть всегда**.
+
+**Общий вид:**  
+<MathExpression displayMode>{"az^2 + bz + c = 0"}</MathExpression>
+
+**Формула корней:**
+
+<MathExpression displayMode>{"z = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}"}</MathExpression>
+
+Теперь <MathExpression inline>{"\\sqrt{D}"}</MathExpression> может быть мнимым — и это нормально.
+
+**Пример 2: Классическое «невозможное» уравнение**
+
+<MathExpression displayMode>{"z^2 + 1 = 0"}</MathExpression>
+
+<MathExpression displayMode>{"z^2 = -1"}</MathExpression>  
+<MathExpression displayMode>{"z = \\pm \\sqrt{-1} = \\pm i"}</MathExpression>
+
+**Пример 3: Более сложное**
+
+<MathExpression displayMode>{"z^2 - 4z + 13 = 0"}</MathExpression>
+
+Дискриминант:  
+<MathExpression displayMode>{"D = 16 - 52 = -36"}</MathExpression>
+
+<MathExpression displayMode>{"\\sqrt{D} = \\sqrt{-36} = 6i"}</MathExpression>
+
+Корни:  
+<MathExpression displayMode>{"z = \\frac{4 \\pm 6i}{2} = 2 \\pm 3i"}</MathExpression>
+
+**Геометрический смысл:**  
+Корни квадратного уравнения с отрицательным дискриминантом всегда расположены симметрично относительно действительной оси (являются сопряжёнными).
+
+<StaticComplexPlane
+  points={[
+    { re: 2, im: 3, label: "2 + 3i", color: "#3b82f6" },
+    { re: 2, im: -3, label: "2 - 3i", color: "#ef4444" }
+  ]}
+/>
+
+---
+
+### 4. Как находить все корни многочленов (фундаментальная теорема алгебры)
+
+**Фундаментальная теорема алгебры** (Гаусс):  
+Любой многочлен степени <MathExpression inline>{"n"}</MathExpression> с комплексными коэффициентами имеет ровно <MathExpression inline>{"n"}</MathExpression> корней в комплексной плоскости (с учётом кратности).
+
+Это значит:  
+- Уравнение <MathExpression inline>{"z^3 = 1"}</MathExpression> имеет **три** корня.  
+- Уравнение <MathExpression inline>{"z^4 + 1 = 0"}</MathExpression> имеет **четыре** корня.
+
+**Пример 4: Корни из единицы (корни n-й степени из 1)**
+
+<MathExpression displayMode>{"z^3 = 1"}</MathExpression>  
+или  
+<MathExpression displayMode>{"z^3 - 1 = 0"}</MathExpression>
+
+Разложим:  
+<MathExpression displayMode>{"(z - 1)(z^2 + z + 1) = 0"}</MathExpression>
+
+Корни:
+- <MathExpression inline>{"z = 1"}</MathExpression>
+- <MathExpression inline>{"z^2 + z + 1 = 0 \\quad \\Rightarrow \\quad z = \\frac{-1 \\pm \\sqrt{1 - 4}}{2} = \\frac{-1 \\pm \\sqrt{-3}}{2} = -\\frac{1}{2} \\pm \\frac{\\sqrt{3}}{2}i"}</MathExpression>
+
+Эти три корня лежат на окружности единичного радиуса и делят её на три равные части (углы 0°, 120°, 240°).
+
+<StaticComplexPlane
+  points={[
+    { re: 1, im: 0, label: "1", color: "#ef4444" },
+    { re: -0.5, im: 0.866, label: "-\\frac{1}{2} + \\frac{\\sqrt{3}}{2}i", color: "#3b82f6" },
+    { re: -0.5, im: -0.866, label: "-\\frac{1}{2} - \\frac{\\sqrt{3}}{2}i", color: "#10b981" }
+  ]}
+/>
+
+---
+
+### 5. Общий алгоритм решения любого уравнения в алгебраической форме
+
+1. Привести уравнение к виду <MathExpression inline>{"P(z) = 0"}</MathExpression>
+2. Если степень 1 — решаем как линейное.
+3. Если степень 2 — используем формулу корней (комплексный квадратный корень не пугает).
+4. Для высших степеней — пытаемся разложить на множители или использовать замену переменной.
+5. Помнить: если коэффициенты действительные, то невещественные корни всегда приходят сопряжёнными парами.
+
+---
+
+### Итог урока
+
+- Алгебраическая форма <MathExpression inline>{"a + bi"}</MathExpression> идеальна для решения уравнений.
+- Комплексные числа «спасают» все квадратные уравнения — корни существуют всегда.
+- По фундаментальной теореме алгебры любое уравнение степени <MathExpression inline>{"n"}</MathExpression> имеет ровно <MathExpression inline>{"n"}</MathExpression> решений на комплексной плоскости.
+- Корни многочленов с действительными коэффициентами симметричны относительно действительной оси.
+
+Теперь ты можешь решать практически любые алгебраические уравнения, в которых раньше появлялось <MathExpression inline>{"\\sqrt{-1}"}</MathExpression> и всё ломалось.
+
+**В следующем уроке (Урок 4)** мы перейдём к **тригонометрической форме** — научимся записывать комплексные числа через модуль и аргумент, умножать их одним движением и извлекать корни любой степени легко и красиво.
+
+Готов к самому изящному представлению комплексных чисел?

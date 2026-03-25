@@ -1,5 +1,118 @@
-# Урок 2: Основные операции
+import { StaticComplexPlane } from "@/components/static-complex-plane"
+import MathExpression from "@/components/MathExpression"
 
-Здесь будет контент второго урока про сложение, вычитание, умножение и деление комплексных чисел.
+# Урок 2: Основные операции с комплексными числами
 
-*Этот раздел находится в разработке.*
+Теперь, когда каждое комплексное число стало точкой на плоскости, пришло время научиться ими управлять.  
+Мы разберём четыре основные операции и главное — **почему** они работают именно так.
+
+---
+
+### 1. Сложение и вычитание
+
+Комплексные числа складываются и вычитаются **по частям** — отдельно действительная, отдельно мнимая.
+
+<MathExpression displayMode>{"(a + bi) + (c + di) = (a + c) + (b + d)i"}</MathExpression>
+
+**Почему именно так?**  
+Потому что <MathExpression inline>{"i"}</MathExpression> — это просто «метка» второго измерения. Она не смешивается с обычными числами. Поэтому мы можем складывать горизонтальную и вертикальную составляющие независимо, как координаты векторов.
+
+**Пример:**
+
+<MathExpression inline>{"(3 + 2i) + (1 - 4i)"}</MathExpression> = <MathExpression inline>{"4 - 2i"}</MathExpression>
+
+Геометрически это обычное сложение векторов: от начала откладываем первый вектор, от его конца — второй. Результат — диагональ параллелограмма.
+
+<StaticComplexPlane
+  points={[
+    { re: 3, im: 2, label: "3 + 2i", color: "#3b82f6" },
+    { re: 1, im: -4, label: "1 - 4i", color: "#10b981" },
+    { re: 4, im: -2, label: "4 - 2i", color: "#ef4444" }
+  ]}
+  vectors={[
+    { from: {re:0, im:0}, to: {re:3, im:2}, color: "#3b82f6" },
+    { from: {re:3, im:2}, to: {re:4, im:-2}, color: "#10b981" },
+    { from: {re:0, im:0}, to: {re:4, im:-2}, color: "#ef4444" }
+  ]}
+/>
+
+Вычитание работает точно так же — просто меняем направление второго вектора.
+
+---
+
+### 2. Умножение — поворот и растяжение
+
+**Алгебраическая формула:**
+
+<MathExpression displayMode>{"(a + bi)(c + di) = (ac - bd) + (ad + bc)i"}</MathExpression>
+
+**Почему появляется минус?**  
+При раскрытии скобок появляется член <MathExpression inline>{"bdi^2"}</MathExpression>. А поскольку <MathExpression inline>{"i^2 = -1"}</MathExpression>, то <MathExpression inline>{"bd \\cdot (-1) = -bd"}</MathExpression>. Именно поэтому действительная часть содержит разность <MathExpression inline>{"ac - bd"}</MathExpression>.
+
+**Геометрический смысл (самое важное!)**
+
+Умножение комплексного числа на другое число — это одновременно:
+- Поворот вектора на угол аргумента второго числа
+- Растяжение (или сжатие) вектора в модуль второго числа
+
+Особенно красиво работает умножение на мнимую единицу:
+
+<MathExpression displayMode>{"z \\cdot i"}</MathExpression> — поворачивает вектор <MathExpression inline>{"z"}</MathExpression> ровно на <MathExpression inline>{"90^\\circ"}</MathExpression> против часовой стрелки, не меняя его длину.
+
+<StaticComplexPlane
+  points={[
+    { re: 1, im: 0, label: "1", color: "#ef4444" },
+    { re: 0, im: 1, label: "i", color: "#3b82f6" },
+    { re: -1, im: 0, label: "-1", color: "#10b981" },
+    { re: 0, im: -1, label: "-i", color: "#f59e0b" }
+  ]}
+  vectors={[
+    { from: {re:0, im:0}, to: {re:1, im:0}, color: "#ef4444" },
+    { from: {re:0, im:0}, to: {re:0, im:1}, color: "#3b82f6" },
+    { from: {re:0, im:0}, to: {re:-1, im:0}, color: "#10b981" },
+    { from: {re:0, im:0}, to: {re:0, im:-1}, color: "#f59e0b" }
+  ]}
+/>
+
+---
+
+### 3. Деление
+
+Деление сводится к умножению на обратное число. Чтобы найти обратное, умножаем числитель и знаменатель на сопряжённое:
+
+<MathExpression displayMode>{"\\frac{1}{c + di} = \\frac{c - di}{c^2 + d^2}"}</MathExpression>
+
+**Полная формула:**
+
+<MathExpression displayMode>{"\\frac{a + bi}{c + di} = \\frac{(a + bi)(c - di)}{c^2 + d^2}"}</MathExpression>
+
+**Почему это работает?**  
+Знаменатель после умножения на сопряжённое становится <MathExpression inline>{"c^2 + d^2 = |w|^2"}</MathExpression> — обычное положительное действительное число. Таким образом мы «очищаем» результат от мнимой части в знаменателе.
+
+---
+
+### 4. Сопряжённое число и модуль
+
+<MathExpression inline>{"\\overline{z} = a - bi"}</MathExpression> — зеркальное отражение точки относительно действительной оси.
+
+<MathExpression inline>{"|z| = \\sqrt{a^2 + b^2}"}</MathExpression> — расстояние от начала координат до точки <MathExpression inline>{"z"}</MathExpression>.
+
+Ключевые свойства:
+- <MathExpression inline>{"z \\cdot \\overline{z} = |z|^2"}</MathExpression>
+- <MathExpression inline>{"|z_1 z_2| = |z_1| \\cdot |z_2|"}</MathExpression>
+
+---
+
+### Итог урока
+
+Комплексные числа подчиняются тем же арифметическим законам, что и действительные, но при этом обладают мощной геометрией:
+
+- Сложение — параллельный перенос векторов
+- Умножение — поворот и масштабирование
+- Умножение на <MathExpression inline>{"i"}</MathExpression> — чистый поворот на <MathExpression inline>{"90^\\circ"}</MathExpression>
+
+Эти свойства делают комплексные числа незаменимым инструментом в физике, инженерии и компьютерной графике.
+
+**В следующем уроке** мы полностью освоим алгебраическую форму и научимся решать любые уравнения с комплексными числами.
+
+Готов двигаться дальше?

@@ -1,4 +1,5 @@
 import { Github, Mail, Globe } from "lucide-react"
+import Link from "next/link"
 
 export function Footer() {
   return (
@@ -19,24 +20,24 @@ export function Footer() {
             <h4 className="font-semibold mb-4">Обучение</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
-                <a href="#" className="hover:text-foreground transition-colors">
+                <Link href="/lessons/lesson-1" className="hover:text-foreground transition-colors">
                   Введение
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-foreground transition-colors">
+                <Link href="/lessons/lesson-3" className="hover:text-foreground transition-colors">
                   Алгебраическая форма
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-foreground transition-colors">
+                <Link href="/lessons/lesson-4" className="hover:text-foreground transition-colors">
                   Тригонометрическая форма
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-foreground transition-colors">
+                <Link href="/lessons/lesson-5" className="hover:text-foreground transition-colors">
                   Показательная форма
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -50,14 +51,14 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="/calculator" className="hover:text-foreground transition-colors">
+                <Link href="/calculator" className="hover:text-foreground transition-colors">
                   Калькулятор
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-foreground transition-colors">
+                <Link href="/examples" className="hover:text-foreground transition-colors">
                   Примеры задач
-                </a>
+                </Link>
               </li>
               <li>
                 <a href="#" className="hover:text-foreground transition-colors">
@@ -78,7 +79,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="https://github.com/corede"
+                  href="https://github.com/TheCoree"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-foreground transition-colors flex items-center gap-2"
@@ -103,18 +104,10 @@ export function Footer() {
         <div className="pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
           <p>
             © 2026 Complex Numbers. Создано{" "}
-            <span className="text-foreground font-medium hover:text-accent transition-colors cursor-pointer">
-              corede
-            </span>
+            <a href="https://github.com/TheCoree" target="_blank" rel="noopener noreferrer" className="text-foreground font-medium hover:text-accent transition-colors cursor-pointer">
+              TheCoree
+            </a>
           </p>
-          <div className="flex gap-6">
-            <a href="#" className="hover:text-foreground transition-colors">
-              Политика конфиденциальности
-            </a>
-            <a href="#" className="hover:text-foreground transition-colors">
-              Условия использования
-            </a>
-          </div>
         </div>
       </div>
     </footer>

@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { BookOpen, Lightbulb, TrendingUp, Zap } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
+import Link from "next/link"
 
 export function Features() {
   const [visibleItems, setVisibleItems] = useState([])
@@ -94,13 +95,15 @@ export function Features() {
               <p className="text-xl opacity-90 mb-8 leading-relaxed font-light">
                 Начните свое путешествие с интерактивных уроков
               </p>
-              <Button
-                size="lg"
-                variant="secondary"
-                className="text-lg px-10 py-7 rounded-full h-auto transition-all duration-300"
-              >
-                Начать обучение
-              </Button>
+              <Link href="/lessons" passHref>
+                <Button
+                  size="lg"
+                  variant="secondary"
+                  className="text-lg px-10 py-7 rounded-full h-auto transition-all duration-300"
+                >
+                  Начать обучение
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

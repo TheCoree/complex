@@ -4,6 +4,7 @@ import { ChevronDown, Menu, Moon, Sun, BookOpen, Calculator, Zap, Grid3x3, Trend
 import { useTheme } from "next-themes"
 import { useEffect, useState, useRef } from "react"
 import { COURSES as courses } from "@/lib/courses"
+import Link from "next/link"
 
 export function Navigation() {
   const { theme, setTheme } = useTheme()
@@ -43,9 +44,9 @@ export function Navigation() {
           </div>
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
-            <a href="/" className="text-sm font-medium hover:text-accent transition-colors">
+            <Link href="/" className="text-sm font-medium hover:text-accent transition-colors">
               Главная
-            </a>
+            </Link>
             <div className="relative" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
               <button className="text-sm font-medium hover:text-accent transition-colors flex items-center gap-1">
                 Обучение
@@ -78,15 +79,15 @@ export function Navigation() {
                 </div>
               )}
             </div>
-            <a href="/lessons" className="text-sm font-medium hover:text-accent transition-colors">
+            <Link href="/lessons" className="text-sm font-medium hover:text-accent transition-colors">
               Все уроки
-            </a>
-            <a href="/calculator" className="text-sm font-medium hover:text-accent transition-colors">
+            </Link>
+            <Link href="/calculator" className="text-sm font-medium hover:text-accent transition-colors">
               Калькулятор
-            </a>
-            <a href="#examples" className="text-sm font-medium hover:text-accent transition-colors">
+            </Link>
+            <Link href="/examples" className="text-sm font-medium hover:text-accent transition-colors">
               Примеры
-            </a>
+            </Link>
           </div>
           <div className="flex items-center gap-4">
             {mounted && (
@@ -95,8 +96,8 @@ export function Navigation() {
                 <span className="sr-only">Переключить тему</span>
               </Button>
             )}
-            <Button className="hidden md:inline-flex bg-primary text-primary-foreground hover:bg-primary/90">
-              Начать изучение
+            <Button asChild className="hidden md:inline-flex bg-primary text-primary-foreground hover:bg-primary/90">
+              <Link href="/lessons">Начать изучение</Link>
             </Button>
             <Button
               variant="ghost"
@@ -186,7 +187,7 @@ export function Navigation() {
                 className="w-full bg-primary text-primary-foreground hover:bg-primary/90 py-6 text-lg mt-4"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                <a href="/calculator">Начать изучение</a>
+                <Link href="/lessons">Начать изучение</Link>
               </Button>
             </div>
           </div>
