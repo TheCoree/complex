@@ -12,7 +12,7 @@ export default function MathExpression({
     displayMode: !inline && displayMode, // displayMode только если не inline
   })
 
-  const Tag = inline ? 'span' : 'div'
+  const Tag = 'span'
 
   return (
     <Tag

@@ -4,24 +4,31 @@ import MathExpression from "@/components/MathExpression"
 # Урок 2: Основные операции с комплексными числами
 
 Теперь, когда каждое комплексное число стало точкой на плоскости, пришло время научиться ими управлять.  
-Мы разберём четыре основные операции и главное — **почему** они работают именно так.
+Мы разберём основные операции: равенство, сложение, вычитание, умножение, деление, а также познакомимся с такими важными понятиями, как модуль и сопряжённые числа.
 
 ---
 
-### 1. Сложение и вычитание
+### 1. Равенство комплексных чисел
+
+Два комплексных числа <MathExpression inline>{"z_1 = a + bi"}</MathExpression> и <MathExpression inline>{"z_2 = c + di"}</MathExpression> равны тогда и только тогда, когда равны их действительные и мнимые части.
+
+<MathExpression displayMode>{"a = c \\quad \\text{и} \\quad b = d"}</MathExpression>
+
+Нельзя сказать, что одно комплексное число «больше» или «меньше» другого. На плоскости точки нельзя выстроить в один ряд, поэтому для комплексных чисел операторы <MathExpression inline>{">"}</MathExpression> и <MathExpression inline>{"<"}</MathExpression> **не имеют смысла**.
+
+---
+
+### 2. Сложение и вычитание
 
 Комплексные числа складываются и вычитаются **по частям** — отдельно действительная, отдельно мнимая.
 
-<MathExpression displayMode>{"(a + bi) + (c + di) = (a + c) + (b + d)i"}</MathExpression>
+<MathExpression displayMode>{"(a + bi) \\pm (c + di) = (a \\pm c) + (b \\pm d)i"}</MathExpression>
 
-**Почему именно так?**  
-Потому что <MathExpression inline>{"i"}</MathExpression> — это просто «метка» второго измерения. Она не смешивается с обычными числами. Поэтому мы можем складывать горизонтальную и вертикальную составляющие независимо, как координаты векторов.
+**Пример сложения:**
 
-**Пример:**
+<MathExpression displayMode>{"(3 + 2i) + (1 - 4i) = (3 + 1) + (2 - 4)i = 4 - 2i"}</MathExpression>
 
-<MathExpression inline>{"(3 + 2i) + (1 - 4i)"}</MathExpression> = <MathExpression inline>{"4 - 2i"}</MathExpression>
-
-Геометрически это обычное сложение векторов: от начала откладываем первый вектор, от его конца — второй. Результат — диагональ параллелограмма.
+Геометрически это обычное сложение векторов по правилу параллелограмма:
 
 <StaticComplexPlane
   points={[
@@ -36,27 +43,67 @@ import MathExpression from "@/components/MathExpression"
   ]}
 />
 
-Вычитание работает точно так же — просто меняем направление второго вектора.
+Вычитание <MathExpression inline>{"z_1 - z_2"}</MathExpression> геометрически означает прибавление к первому вектору противоположного <MathExpression inline>{"(-z_2)"}</MathExpression>.
 
 ---
 
-### 2. Умножение — поворот и растяжение
+### 3. Модуль комплексного числа
 
-**Алгебраическая формула:**
+**Модуль** комплексного числа <MathExpression inline>{"z = a + bi"}</MathExpression> (обозначается как <MathExpression inline>{"|z|"}</MathExpression>) — это расстояние от начала координат до точки <MathExpression inline>{"z"}</MathExpression> на комплексной плоскости.
 
-<MathExpression displayMode>{"(a + bi)(c + di) = (ac - bd) + (ad + bc)i"}</MathExpression>
+По теореме Пифагора длина вектора равна:
 
-**Почему появляется минус?**  
-При раскрытии скобок появляется член <MathExpression inline>{"bdi^2"}</MathExpression>. А поскольку <MathExpression inline>{"i^2 = -1"}</MathExpression>, то <MathExpression inline>{"bd \\cdot (-1) = -bd"}</MathExpression>. Именно поэтому действительная часть содержит разность <MathExpression inline>{"ac - bd"}</MathExpression>.
+<MathExpression displayMode>{"|z| = \\sqrt{a^2 + b^2}"}</MathExpression>
 
-**Геометрический смысл (самое важное!)**
+**Пример:**  
+Если <MathExpression inline>{"z = 3 - 4i"}</MathExpression>, то его модуль:
+<MathExpression displayMode>{"|z| = \\sqrt{3^2 + (-4)^2} = \\sqrt{9 + 16} = \\sqrt{25} = 5"}</MathExpression>
+
+В отличие от самих комплексных чисел, модули — это обычные действительные неотрицательные числа, и их **можно сравнивать** между собой (кто дальше от нуля).
+
+---
+
+### 4. Комплексно-сопряжённые числа
+
+Если у комплексного числа изменить знак мнимой части на противоположный, мы получим **сопряжённое** число. Оно обозначается чертой сверху:
+
+<MathExpression displayMode>{"z = a + bi \\quad \\Rightarrow \\quad \\overline{z} = a - bi"}</MathExpression>
+
+Геометрически это зеркальное отражение точки относительно действительной оси (оси X).
+
+<StaticComplexPlane
+  points={[
+    { re: -2, im: 3, label: "-2 + 3i", color: "#3b82f6" },
+    { re: -2, im: -3, label: "-2 - 3i", color: "#ef4444" }
+  ]}
+/>
+
+**(Замечательное свойство!)**  
+Произведение числа на его сопряжённое всегда даёт квадрат модуля:
+
+<MathExpression displayMode>{"z \\cdot \\overline{z} = (a+bi)(a-bi) = a^2 - (bi)^2 = a^2 - b^2(-1) = a^2 + b^2 = |z|^2"}</MathExpression>
+
+Это свойство поможет нам научиться делить комплексные числа.
+
+---
+
+### 5. Умножение
+
+Умножение выполняется как обычное раскрытие скобок, с заменой <MathExpression inline>{"i^2"}</MathExpression> на <MathExpression inline>{"-1"}</MathExpression>:
+
+<MathExpression displayMode>{"(a + bi)(c + di) = ac + adi + bci + bdi^2 = (ac - bd) + (ad + bc)i"}</MathExpression>
+
+**Пример:**
+
+<MathExpression displayMode>{"(2 + 3i)(1 - 4i) = 2 - 8i + 3i - 12i^2 = 2 - 5i - 12(-1) = 2 - 5i + 12 = 14 - 5i"}</MathExpression>
+
+**Геометрический смысл (самое важное!):**
 
 Умножение комплексного числа на другое число — это одновременно:
 - Поворот вектора на угол аргумента второго числа
-- Растяжение (или сжатие) вектора в модуль второго числа
+- Растяжение (или сжатие) вектора пропорционально модулю второго числа
 
 Особенно красиво работает умножение на мнимую единицу:
-
 <MathExpression displayMode>{"z \\cdot i"}</MathExpression> — поворачивает вектор <MathExpression inline>{"z"}</MathExpression> ровно на <MathExpression inline>{"90^\\circ"}</MathExpression> против часовой стрелки, не меняя его длину.
 
 <StaticComplexPlane
@@ -76,43 +123,36 @@ import MathExpression from "@/components/MathExpression"
 
 ---
 
-### 3. Деление
+### 6. Деление
 
-Деление сводится к умножению на обратное число. Чтобы найти обратное, умножаем числитель и знаменатель на сопряжённое:
+Как разделить одно число на другое, если в знаменателе стоит <MathExpression inline>{"i"}</MathExpression>? Нам нужно от него избавиться!  
+Для этого мы умножаем и числитель, и знаменатель дроби на **сопряжённое** знаменателю число. Тогда в знаменателе получится обычное действительное число (квадрат модуля).
 
-<MathExpression displayMode>{"\\frac{1}{c + di} = \\frac{c - di}{c^2 + d^2}"}</MathExpression>
+<MathExpression displayMode>{"\\frac{z_1}{z_2} = \\frac{a + bi}{c + di} = \\frac{(a + bi)(c - di)}{(c + di)(c - di)} = \\frac{ac - adi + bci - bdi^2}{c^2 + d^2}"}</MathExpression>
 
-**Полная формула:**
+**Пример:**
 
-<MathExpression displayMode>{"\\frac{a + bi}{c + di} = \\frac{(a + bi)(c - di)}{c^2 + d^2}"}</MathExpression>
+Разделим <MathExpression inline>{"1 + 5i"}</MathExpression> на <MathExpression inline>{"1 + 2i"}</MathExpression>.
+Умножаем обе части на сопряжённое знаменателя: <MathExpression inline>{"1 - 2i"}</MathExpression>.
 
-**Почему это работает?**  
-Знаменатель после умножения на сопряжённое становится <MathExpression inline>{"c^2 + d^2 = |w|^2"}</MathExpression> — обычное положительное действительное число. Таким образом мы «очищаем» результат от мнимой части в знаменателе.
+<MathExpression displayMode>{"\\frac{1 + 5i}{1 + 2i} = \\frac{(1 + 5i)(1 - 2i)}{(1 + 2i)(1 - 2i)} = \\frac{1 - 2i + 5i - 10i^2}{1^2 + 2^2}"}</MathExpression>
 
----
+<MathExpression displayMode>{"= \\frac{1 + 3i + 10}{1 + 4} = \\frac{11 + 3i}{5} = \\frac{11}{5} + \\frac{3}{5}i = 2.2 + 0.6i"}</MathExpression>
 
-### 4. Сопряжённое число и модуль
-
-<MathExpression inline>{"\\overline{z} = a - bi"}</MathExpression> — зеркальное отражение точки относительно действительной оси.
-
-<MathExpression inline>{"|z| = \\sqrt{a^2 + b^2}"}</MathExpression> — расстояние от начала координат до точки <MathExpression inline>{"z"}</MathExpression>.
-
-Ключевые свойства:
-- <MathExpression inline>{"z \\cdot \\overline{z} = |z|^2"}</MathExpression>
-- <MathExpression inline>{"|z_1 z_2| = |z_1| \\cdot |z_2|"}</MathExpression>
+Таким образом мы «очищаем» результат от мнимой части в знаменателе и получаем ответ в стандартной алгебраической форме <MathExpression inline>{"a + bi"}</MathExpression>.
 
 ---
 
 ### Итог урока
 
-Комплексные числа подчиняются тем же арифметическим законам, что и действительные, но при этом обладают мощной геометрией:
+Комплексные числа подчиняются обычным алгебраическим правилам с единственной оговоркой, что <MathExpression inline>{"i^2 = -1"}</MathExpression>:
+- **Модуль** <MathExpression inline>{"|z|"}</MathExpression> — это длина вектора на плоскости.
+- **Сопряжённое число** <MathExpression inline>{"\\overline{z}"}</MathExpression> помогает избавиться от <MathExpression inline>{"i"}</MathExpression> при умножении и делении, так как <MathExpression inline>{"z \\cdot \\overline{z} = |z|^2"}</MathExpression>.
+- Сложение работает как параллельный перенос векторов, а умножение — как поворот и масштабирование.
+- Деление сводится к искусственному переносу мнимой части из знаменателя в числитель с помощью сопряжения.
 
-- Сложение — параллельный перенос векторов
-- Умножение — поворот и масштабирование
-- Умножение на <MathExpression inline>{"i"}</MathExpression> — чистый поворот на <MathExpression inline>{"90^\\circ"}</MathExpression>
+Данные свойства делают комплексные числа незаменимым инструментом в физике, инженерии и компьютерной графике.
 
-Эти свойства делают комплексные числа незаменимым инструментом в физике, инженерии и компьютерной графике.
-
-**В следующем уроке** мы полностью освоим алгебраическую форму и научимся решать любые уравнения с комплексными числами.
+**В следующем уроке** мы научимся использовать алгебраическую форму для решения любых уравнений (в том числе находить корни из отрицательных чисел).
 
 Готов двигаться дальше?

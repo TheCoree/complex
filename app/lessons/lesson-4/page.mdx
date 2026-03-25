@@ -1,5 +1,162 @@
-# Урок 4: Тригонометрическая форма
+import { StaticComplexPlane } from "@/components/static-complex-plane"
+import MathExpression from "@/components/MathExpression"
 
-Здесь будет объяснение полярных координат, модуля и аргумента комплексного числа.
+# Урок 4: Тригонометрическая (полярная) форма комплексных чисел
 
-*Этот раздел находится в разработке.*
+В прошлых уроках мы работали с комплексными числами в **алгебраической форме** <MathExpression inline>{"z = a + bi"}</MathExpression>.  
+Она отлично подходит для сложения и вычитания. Но когда дело доходит до умножения десятков чисел, извлечения корней из отрицательных значений или возведения в сотую степень, алгебраическая форма становится невыносимо громоздкой. 
+
+К счастью, существует гораздо более изящный способ описать ту же самую точку на плоскости.
+
+---
+
+### 1. Как перейти от прямоугольной формы к полярной
+
+Любую точку на плоскости можно задать не при помощи координат (x, y), а с помощью **расстояния от центра** и **направления (угла)**. 
+
+Для комплексного числа <MathExpression inline>{"z = a + bi"}</MathExpression>:
+
+1. **Модуль (расстояние)**: это просто длина вектора, которую мы уже умеем находить. Обозначается буквой <MathExpression inline>{"r"}</MathExpression>.
+   <MathExpression displayMode>{"r = |z| = \\sqrt{a^2 + b^2}"}</MathExpression>
+
+2. **Аргумент (угол)**: это угол наклона вектора к положительному направлению оси X. Обозначается буквой <MathExpression inline>{"\\varphi"}</MathExpression> (фи).
+   <MathExpression displayMode>{"\\tan \\varphi = \\frac{b}{a}"}</MathExpression>
+   *(С учетом четверти, в которой находится точка).*
+
+Зная <MathExpression inline>{"r"}</MathExpression> и <MathExpression inline>{"\\varphi"}</MathExpression>, мы легко можем восстановить исходные координаты:  
+<MathExpression inline>{"a = r \\cos \\varphi"}</MathExpression>  
+<MathExpression inline>{"b = r \\sin \\varphi"}</MathExpression>
+
+Подставив это в <MathExpression inline>{"z = a + bi"}</MathExpression>, получаем **тригонометрическую форму**:
+
+<MathExpression displayMode>{"z = r(\\cos \\varphi + i \\sin \\varphi)"}</MathExpression>
+
+**Пример перехода:**  
+Возьмём число <MathExpression inline>{"z = 1 + i"}</MathExpression>.
+- Модуль: <MathExpression inline>{"r = \\sqrt{1^2 + 1^2} = \\sqrt{2}"}</MathExpression>
+- Аргумент: <MathExpression inline>{"a=1, b=1"}</MathExpression> (точка в 1-й четверти), <MathExpression inline>{"\\tan \\varphi = 1"}</MathExpression>. Значит, <MathExpression inline>{"\\varphi = 45^\\circ"}</MathExpression> (или <MathExpression inline>{"\\pi/4"}</MathExpression> радиан).
+
+Тригонометрическая форма:
+<MathExpression displayMode>{"z = \\sqrt{2}(\\cos 45^\\circ + i \\sin 45^\\circ)"}</MathExpression>
+
+<StaticComplexPlane
+  points={[
+    { re: 1, im: 1, label: "1 + i", color: "#3b82f6" }
+  ]}
+  vectors={[
+    { from: { re: 0, im: 0 }, to: { re: 1, im: 1 }, color: "#3b82f6" }
+  ]}
+/>
+
+*(График показывает радиус-вектор длиной $\sqrt{2}$ под углом $45^\circ$)*.
+
+---
+
+### 2. Почему она так полезна? Умножение и деление
+
+В тригонометрической форме умножение и деление превращаются в детскую арифметику. Никакого кропотливого раскрытия скобок!
+
+Пусть у нас есть два числа:
+<MathExpression inline>{"z_1 = r_1(\\cos \\varphi_1 + i \\sin \\varphi_1)"}</MathExpression>  
+<MathExpression inline>{"z_2 = r_2(\\cos \\varphi_2 + i \\sin \\varphi_2)"}</MathExpression>
+
+**Формула умножения:**
+<MathExpression displayMode>{"z_1 \\cdot z_2 = r_1 r_2 \\big( \\cos(\\varphi_1 + \\varphi_2) + i \\sin(\\varphi_1 + \\varphi_2) \\big)"}</MathExpression>
+
+> **Правило:** При умножении **модули перемножаются**, а **аргументы складываются**.
+
+**Пример:**  
+Если <MathExpression inline>{"z_1"}</MathExpression> имеет длину 2 и угол <MathExpression inline>{"30^\\circ"}</MathExpression>, а <MathExpression inline>{"z_2"}</MathExpression> имеет длину 3 и угол <MathExpression inline>{"45^\\circ"}</MathExpression>, то их произведение <MathExpression inline>{"z_1 \\cdot z_2"}</MathExpression> будет вектором длиной <MathExpression inline>{"2 \\times 3 = 6"}</MathExpression>, направленным под углом <MathExpression inline>{"30^\\circ + 45^\\circ = 75^\\circ"}</MathExpression>.
+
+<MathExpression displayMode>{"z_1 z_2 = 6(\\cos 75^\\circ + i \\sin 75^\\circ)"}</MathExpression>
+
+**Формула деления работает ровно наоборот:**
+<MathExpression displayMode>{"\\frac{z_1}{z_2} = \\frac{r_1}{r_2} \\big( \\cos(\\varphi_1 - \\varphi_2) + i \\sin(\\varphi_1 - \\varphi_2) \\big)"}</MathExpression>
+
+> **Правило:** При делении **модули делятся**, а **аргументы вычитаются**.
+
+Это невероятное упрощение! Складывать углы гораздо легче, чем перемножать полиномы и помнить про <MathExpression inline>{"i^2 = -1"}</MathExpression>.
+
+---
+
+### 3. Возведение в степень: магия формулы Муавра
+
+Что, если мы хотим возвести комплексное число в $n$-ю степень? В тригонометрической форме это значит, что мы умножаем число на само себя $n$ раз. Модуль умножится $n$ раз, а угол прибавится $n$ раз!
+
+Так появилась знаменитая **формула Муавра**:
+
+<MathExpression displayMode>{"z^n = \\big[ r(\\cos \\varphi + i \\sin \\varphi) \\big]^n = r^n \\big( \\cos(n \\varphi) + i \\sin(n \\varphi) \\big)"}</MathExpression>
+
+**Фантастический пример!**  
+Возведем число <MathExpression inline>{"z = 1 + i"}</MathExpression> в 8-ю степень: <MathExpression inline>{"(1 + i)^8"}</MathExpression>. Попробуй сделать это в лоб алгебраически... Ужас!
+
+Но мы знаем его тригонометрическую форму: <MathExpression inline>{"z = \\sqrt{2}(\\cos 45^\\circ + i \\sin 45^\\circ)"}</MathExpression>.
+
+Применяем формулу Муавра:
+- Возводим модуль в 8-ю степень: <MathExpression inline>{"(\\sqrt{2})^8 = 2^4 = 16"}</MathExpression>
+- Умножаем угол на 8: <MathExpression inline>{"45^\\circ \\times 8 = 360^\\circ"}</MathExpression> (а <MathExpression inline>{"360^\\circ"}</MathExpression> — это полный оборот, то есть <MathExpression inline>{"0^\\circ"}</MathExpression>).
+
+Итоговый результат:
+<MathExpression displayMode>{"z^8 = 16 (\\cos 360^\\circ + i \\sin 360^\\circ) = 16 (1 + i \\cdot 0) = 16"}</MathExpression>
+
+Один шаг — и сложнейшая алгебраическая задача решена устно!
+
+---
+
+### 4. Извлечение корней — рождение симметрии
+
+Мы знаем, что в действительных числах корень из положительного числа имеет два ответа: <MathExpression inline>{"\\sqrt{4} = \\pm 2"}</MathExpression>, а кубический корень — только один: <MathExpression inline>{"\\sqrt[3]{8} = 2"}</MathExpression>. 
+
+В мире комплексных чисел работает **Фундаментальная теорема алгебры**: корень <MathExpression inline>{"n"}</MathExpression>-й степени **всегда выдает ровно <MathExpression inline>{"n"}</MathExpression> решений**.
+
+Чтобы извлечь корень степени <MathExpression inline>{"n"}</MathExpression>, нужно произвести действие, обратное возведению в степень. Из модуля мы просто извлекаем обычный корень <MathExpression inline>{"\\sqrt[n]{r}"}</MathExpression>. А угол мы делим на <MathExpression inline>{"n"}</MathExpression>. 
+Но так как <MathExpression inline>{"360^\\circ"}</MathExpression> (полный оборот) возвращает нас в ту же точку, мы должны учитывать каждый из таких оборотов, именно они при делении угла создают новые (дополнительные) корни!
+
+**Формула Муавра для корней:**
+<MathExpression displayMode>{"w_k = \\sqrt[n]{r} \\left( \\cos \\frac{\\varphi + 360^\\circ k}{n} + i \\sin \\frac{\\varphi + 360^\\circ k}{n} \\right)"}</MathExpression>
+где <MathExpression inline>{"k = 0, 1, 2, \\dots, (n-1)"}</MathExpression>.
+
+**Пример: Найдем все ТРИ кубических корня из числа 8!**
+
+Обычно мы говорим, что <MathExpression inline>{"\\sqrt[3]{8} = 2"}</MathExpression>. И всё. Но на комплексной плоскости число <MathExpression inline>{"8"}</MathExpression> имеет аргумент <MathExpression inline>{"0^\\circ"}</MathExpression>.
+Запишем его: <MathExpression inline>{"z = 8 (\\cos 0^\\circ + i \\sin 0^\\circ)"}</MathExpression>.
+
+Применим формулу для <MathExpression inline>{"n = 3"}</MathExpression>:
+Модуль корней: <MathExpression inline>{"\\sqrt[3]{8} = 2"}</MathExpression>.  
+Углы: делим <MathExpression inline>{"0^\\circ + 360^\\circ k"}</MathExpression> на <MathExpression inline>{"3"}</MathExpression>.
+1. При <MathExpression inline>{"k=0"}</MathExpression>: угол <MathExpression inline>{"0^\\circ / 3 = 0^\\circ"}</MathExpression>  
+   <MathExpression inline>{"w_0 = 2(\\cos 0^\\circ + i \\sin 0^\\circ) = 2"}</MathExpression> *(наш старый знакомый)*
+2. При <MathExpression inline>{"k=1"}</MathExpression>: угол <MathExpression inline>{"360^\\circ / 3 = 120^\\circ"}</MathExpression>  
+   <MathExpression inline>{"w_1 = 2(\\cos 120^\\circ + i \\sin 120^\\circ) = 2(-\\frac{1}{2} + i\\frac{\\sqrt{3}}{2}) = -1 + i\\sqrt{3}"}</MathExpression>
+3. При <MathExpression inline>{"k=2"}</MathExpression>: угол <MathExpression inline>{"720^\\circ / 3 = 240^\\circ"}</MathExpression>  
+   <MathExpression inline>{"w_2 = 2(\\cos 240^\\circ + i \\sin 240^\\circ) = 2(-\\frac{1}{2} - i\\frac{\\sqrt{3}}{2}) = -1 - i\\sqrt{3}"}</MathExpression>
+
+Если нарисовать эти три ответа на плоскости, они образуют **идеальный равносторонний треугольник**, вписанный в окружность радиуса 2!
+
+<StaticComplexPlane
+  points={[
+    { re: 2, im: 0, label: "2", color: "#ef4444" },
+    { re: -1, im: 1.732, label: "-1 + i\\sqrt{3}", color: "#3b82f6" },
+    { re: -1, im: -1.732, label: "-1 - i\\sqrt{3}", color: "#10b981" }
+  ]}
+  vectors={[
+    { from: { re: 0, im: 0 }, to: { re: 2, im: 0 }, color: "#ef4444" },
+    { from: { re: 0, im: 0 }, to: { re: -1, im: 1.732 }, color: "#3b82f6" },
+    { from: { re: 0, im: 0 }, to: { re: -1, im: -1.732 }, color: "#10b981" }
+  ]}
+/>
+
+---
+
+### Итог урока
+
+- Тригонометрическая форма <MathExpression inline>{"r (\\cos \\varphi + i \\sin \\varphi)"}</MathExpression> фокусируется на **величине** и **направлении** вектора.
+- Эта форма создана для быстрого **умножения и деления**: перемножаем модули и просто складываем углы!
+- **Формула Муавра** позволяет возводить числа в любые степени в одно действие: <MathExpression inline>{"(r, \\varphi)^n \\rightarrow (r^n, n\\varphi)"}</MathExpression>.
+- Корни <MathExpression inline>{"n"}</MathExpression>-й степени из любого числа образуют систему из <MathExpression inline>{"n"}</MathExpression> симметричных точек на окружности (они выстраиваются в правильный <MathExpression inline>{"n"}</MathExpression>-угольник).
+
+Теперь ты знаешь, как геометрия углов и окружностей колоссально упрощает сложную алгебру огромных степеней.
+
+**В следующем уроке (Урок 5)** мы сделаем финальный шаг и познакомимся с самой мощной формулой всей математики — **формулой Эйлера** <MathExpression inline>{"e^{i\\varphi} = \\cos \\varphi + i \\sin \\varphi"}</MathExpression>, которая объединяет тригонометрию и экспоненты в одно невероятное целое.
+
+Готов к настоящему волшебству?
