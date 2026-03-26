@@ -133,7 +133,7 @@ export function Visualization() {
           </div>
 
           <div className="relative rounded-3xl overflow-hidden border border-border/50" onMouseMove={handleMouseMove}>
-            <canvas ref={canvasRef} className="w-full aspect-[16/10] lg:aspect-[21/9] bg-background/50" />
+            <canvas ref={canvasRef} className="w-full aspect-[4/3] sm:aspect-[16/10] lg:aspect-[21/9] bg-background/50" />
             <div className="absolute top-6 left-6 text-xl text-muted-foreground font-mono"><MathExpression>{'z=re^{i\θ}'}</MathExpression></div>
           </div>
         </div>

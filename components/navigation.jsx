@@ -114,13 +114,13 @@ export function Navigation() {
         <div className="md:hidden fixed h-screen inset-x-0 top-16 bottom-0 bg-background border-t border-border z-[160] overflow-y-scroll">
           <div className="container mx-auto px-5 py-7">
             <div className="flex flex-col gap-6">
-              <a
-                href="#home"
+              <Link
+                href="/"
                 className="text-lg font-medium hover:text-accent transition-colors py-2"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Главная
-              </a>
+              </Link>
               <div>
                 <button
                   className="text-lg font-medium hover:text-accent transition-colors flex items-center justify-between w-full py-2"
@@ -175,13 +175,13 @@ export function Navigation() {
               >
                 Калькулятор
               </a>
-              <a
-                href="#examples"
+              <Link
+                href="/examples"
                 className="text-lg font-medium hover:text-accent transition-colors py-2"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Примеры
-              </a>
+              </Link>
               <Button
                 asChild
                 className="w-full bg-primary text-primary-foreground hover:bg-primary/90 py-6 text-lg mt-4"

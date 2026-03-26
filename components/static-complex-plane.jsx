@@ -163,7 +163,7 @@ export function StaticComplexPlane({
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
         onPointerCancel={handlePointerUp}
-        className={`relative w-full aspect-[2/1] bg-background/40 backdrop-blur-2xl border border-border/40 shadow-xl overflow-hidden touch-none select-none rounded-[1.5rem] md:rounded-[2.5rem] ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
+        className={`relative w-full aspect-[4/3] md:aspect-[2/1] bg-background/40 backdrop-blur-2xl border border-border/40 shadow-xl overflow-hidden touch-none select-none rounded-[1.5rem] md:rounded-[2.5rem] ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
       >
         <div className="absolute inset-0 bg-gradient-to-tr from-accent/5 via-transparent to-primary/5 pointer-events-none" />
 
