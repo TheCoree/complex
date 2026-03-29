@@ -38,7 +38,8 @@ export function Visualization() {
       ctx.strokeStyle = "rgba(85, 140, 160, 0.06)"
       ctx.lineWidth = 1
 
-      for (let i = -8; i <= 8; i++) {
+      const gridRange = Math.ceil(Math.max(w, h) / scale) + 1
+      for (let i = -gridRange; i <= gridRange; i++) {
         ctx.beginPath()
         ctx.moveTo(centerX + i * scale, 0)
         ctx.lineTo(centerX + i * scale, h)

@@ -149,16 +149,7 @@ export function Calculator() {
       drawVector(result, "rgba(244, 63, 94, 0.9)", "res")
     }
 
-    const handleResize = () => {
-      draw()
-    }
-
-    window.addEventListener("resize", handleResize)
     draw()
-
-    return () => {
-      window.removeEventListener("resize", handleResize)
-    }
   }, [z1, z2, result, currentScaleVal])
 
   const toTrigForm = (val) => {
@@ -310,7 +301,7 @@ export function Calculator() {
       </div>
 
       <div className="lg:sticky lg:top-32 md:space-y-8">
-        <Card className="bg-background/40 backdrop-blur-2xl border-border/40 shadow-xl overflow-hidden aspect-[4/3] md:aspect-square flex flex-col rounded-[1.5rem] md:rounded-[2.5rem]">
+        <Card className="bg-background/40 backdrop-blur-2xl border-border/40 shadow-xl overflow-hidden aspect-square flex flex-col rounded-[2.5rem]">
           <CardHeader className="border-b border-border/10">
             <CardTitle className="text-xl">Комплексная плоскость</CardTitle>
             <CardDescription className="text-sm">Интерактивный график</CardDescription>
